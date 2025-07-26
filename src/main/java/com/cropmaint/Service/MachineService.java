@@ -29,15 +29,15 @@ public class MachineService {
             throw new DuplicateResourceException("Machine with code '" + requestDTO.getMachineCode() + "' already exists.");
         }
 
-        Machine machine = mapRequestDtoToEntity(requestDTO); // Convert DTO to Entity
-        Machine savedMachine = machineRepository.save(machine); // Save to database
-        return mapEntityToResponseDto(savedMachine); // Convert saved Entity to ResponseDTO
+        Machine machine = mapRequestDtoToEntity(requestDTO);
+        Machine savedMachine = machineRepository.save(machine);
+        return mapEntityToResponseDto(savedMachine);
     }
 
 
     public List<MachineResponseDTO> getAllMachines() {
         return machineRepository.findAll().stream()
-                .map(this::mapEntityToResponseDto) // Convert each Entity to ResponseDTO
+                .map(this::mapEntityToResponseDto)
                 .collect(Collectors.toList());
     }
 
@@ -51,13 +51,11 @@ public class MachineService {
         Machine existingMachine = machineRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Machine not found with ID: " + id));
 
-        // Check for machineCode duplication, but allow the existing machine to keep its code
         Optional<Machine> machineWithSameCode = machineRepository.findByMachineCode(requestDTO.getMachineCode());
         if (machineWithSameCode.isPresent() && !machineWithSameCode.get().getId().equals(id)) {
             throw new DuplicateResourceException("Machine with code '" + requestDTO.getMachineCode() + "' already exists for another machine.");
         }
 
-        // Update fields from DTO to existing entity
         existingMachine.setName(requestDTO.getName());
         existingMachine.setMachineCode(requestDTO.getMachineCode());
         existingMachine.setLocation(requestDTO.getLocation());
@@ -80,8 +78,7 @@ public class MachineService {
         machineRepository.deleteById(id);
     }
 
-    // --- Helper methods for DTO to Entity mapping ---
-    // For larger projects, consider using mapping libraries like ModelMapper or MapStruct.
+
     private Machine mapRequestDtoToEntity(MachineRequestDTO dto) {
         Machine machine = new Machine();
         machine.setName(dto.getName());

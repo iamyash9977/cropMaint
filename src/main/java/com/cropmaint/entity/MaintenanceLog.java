@@ -1,46 +1,102 @@
 package com.cropmaint.entity;
 
-import com.cropmaint.enums.MaintenanceLogStatus;
-import com.cropmaint.enums.MaintenanceType;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-
-import java.time.LocalDateTime;
+import jakarta.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "maintenance_log")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "maintenance_logs")
 public class MaintenanceLog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "issue_description", columnDefinition = "TEXT", nullable = false)
-    private String issueDescription;
+    @NotNull
+    @Column(name = "log_date")
+    private LocalDate logDate;
 
-    @Column(name = "maintenance_date", nullable = false)
-    private LocalDateTime maintenanceDate;
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "maintenance_type", nullable = false)
-    private MaintenanceType maintenanceType;
+    @Column(name = "performed_by")
+    private String performedBy;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private MaintenanceLogStatus status;
-
-    private String notes;
+    private Double cost;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "machine_id", nullable = false)
     private Machine machine;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "technician_id")
-    private User technician;
+    public MaintenanceLog() {
+    }
+
+    public MaintenanceLog(LocalDate logDate, String description, String performedBy, Double cost, Machine machine) {
+        this.logDate = logDate;
+        this.description = description;
+        this.performedBy = performedBy;
+        this.cost = cost;
+        this.machine = machine;
+    }
+
+    // --- Getters and Setters ---
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDate getLogDate() {
+        return logDate;
+    }
+
+    public void setLogDate(LocalDate logDate) {
+        this.logDate = logDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPerformedBy() {
+        return performedBy;
+    }
+
+    public void setPerformedBy(String performedBy) {
+        this.performedBy = performedBy;
+    }
+
+    public Double getCost() {
+        return cost;
+    }
+
+    public void setCost(Double cost) {
+        this.cost = cost;
+    }
+
+    public Machine getMachine() {
+        return machine;
+    }
+
+    public void setMachine(Machine machine) {
+        this.machine = machine;
+    }
+
+    @Override
+    public String toString() {
+        return "MaintenanceLog{" +
+                "id=" + id +
+                ", logDate=" + logDate +
+                ", description='" + description + '\'' +
+                ", performedBy='" + performedBy + '\'' +
+                ", cost=" + cost +
+                ", machineId=" + (machine != null ? machine.getId() : "null") +
+                '}';
+    }
 }
