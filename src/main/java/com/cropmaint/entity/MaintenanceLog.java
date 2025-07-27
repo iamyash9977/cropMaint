@@ -1,5 +1,6 @@
 package com.cropmaint.entity;
 
+import com.cropmaint.model.MaintenanceStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -28,15 +29,25 @@ public class MaintenanceLog {
     @JoinColumn(name = "machine_id", nullable = false)
     private Machine machine;
 
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "Maintenance status cannot be null")
+    @Column(name = "status")
+    private MaintenanceStatus status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "technician_id")
+    private User technician;
+
     public MaintenanceLog() {
     }
 
-    public MaintenanceLog(LocalDate logDate, String description, String performedBy, Double cost, Machine machine) {
+    public MaintenanceLog(LocalDate logDate, String description, String performedBy, Double cost, Machine machine, MaintenanceStatus status) {
         this.logDate = logDate;
         this.description = description;
         this.performedBy = performedBy;
         this.cost = cost;
         this.machine = machine;
+        this.status = status;
     }
 
     // --- Getters and Setters ---
@@ -88,6 +99,15 @@ public class MaintenanceLog {
         this.machine = machine;
     }
 
+    // Getter and Setter for status
+    public MaintenanceStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(MaintenanceStatus status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "MaintenanceLog{" +
@@ -97,6 +117,7 @@ public class MaintenanceLog {
                 ", performedBy='" + performedBy + '\'' +
                 ", cost=" + cost +
                 ", machineId=" + (machine != null ? machine.getId() : "null") +
+                ", status=" + status +
                 '}';
     }
 }

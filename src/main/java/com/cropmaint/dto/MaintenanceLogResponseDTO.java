@@ -10,7 +10,7 @@ public class MaintenanceLogResponseDTO {
     private String performedBy;
     private Double cost;
     private Long machineId;
-
+    private String status;
 
     public Long getId() {
         return id;
@@ -58,5 +58,13 @@ public class MaintenanceLogResponseDTO {
 
     public void setMachineId(Long machineId) {
         this.machineId = machineId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

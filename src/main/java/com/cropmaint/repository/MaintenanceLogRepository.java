@@ -21,9 +21,9 @@ public interface MaintenanceLogRepository extends JpaRepository<MaintenanceLog, 
 
     List<MaintenanceLog> findByMachineAndStatus(Machine machine, MaintenanceLogStatus status);
 
-    List<MaintenanceLog> findByMaintenanceDateBetween(LocalDateTime startDateTime, LocalDateTime endDateTime);
+    List<MaintenanceLog> findByLogDateBetween(LocalDateTime startDateTime, LocalDateTime endDateTime);
 
-    Optional<MaintenanceLog> findTopByMachineOrderByMaintenanceDateDesc(Machine machine);
+    Optional<MaintenanceLog> findTopByMachineOrderByLogDateDesc(Machine machine);
 
     List<MaintenanceLog> findByTechnician(User technician);
 

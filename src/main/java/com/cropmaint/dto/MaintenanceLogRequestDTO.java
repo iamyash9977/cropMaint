@@ -22,7 +22,10 @@ public class MaintenanceLogRequestDTO {
     private Double cost;
 
     @NotNull(message = "Machine ID cannot be null")
-    private Long machineId; // To link to the Machine
+    private Long machineId;
+
+    private String status;
+
 
     public LocalDate getLogDate() {
         return logDate;
@@ -62,5 +65,13 @@ public class MaintenanceLogRequestDTO {
 
     public void setMachineId(Long machineId) {
         this.machineId = machineId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

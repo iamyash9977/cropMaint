@@ -24,7 +24,7 @@ public class MachineService {
     }
 
     public MachineResponseDTO createMachine(MachineRequestDTO requestDTO) {
-        // Check if a machine with the same code already exists
+
         if (machineRepository.findByMachineCode(requestDTO.getMachineCode()).isPresent()) {
             throw new DuplicateResourceException("Machine with code '" + requestDTO.getMachineCode() + "' already exists.");
         }
