@@ -13,6 +13,12 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MachineRequestDTO {
+    @NotBlank(message = "Machine name cannot be blank")
+    private String name;
+
+    @NotBlank(message = "Machine code cannot be blank")
+    @Size(min = 3, max = 20, message = "Machine code must be between 3 and 20 characters")
+    private String machineCode;
 
 
     @NotBlank(message = "Machine name cannot be blank")
