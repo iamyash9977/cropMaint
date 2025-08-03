@@ -1,7 +1,8 @@
 package com.cropmaint.enums;
 
 public enum CriticalityLevel {
-    HIGH,
+    LOW,
     MEDIUM,
-    LOW
+    HIGH,
+    CRITICAL
 }

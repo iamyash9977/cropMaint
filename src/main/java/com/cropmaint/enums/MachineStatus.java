@@ -1,7 +1,7 @@
 package com.cropmaint.enums;
 
 public enum MachineStatus {
-    ACTIVE,
-    UNDER_MAINTENANCE,
-    INACTIVE
+    OPERATIONAL,
+    IN_MAINTENANCE,
+    OUT_OF_SERVICE
 }

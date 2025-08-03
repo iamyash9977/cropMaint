@@ -1,4 +1,4 @@
-package com.cropmaint.service;
+package com.cropmaint.Service;
 
 import com.cropmaint.dto.MachineRequestDTO;
 import com.cropmaint.dto.MachineResponseDTO;
@@ -8,6 +8,8 @@ import com.cropmaint.exception.ResourceNotFoundException;
 import com.cropmaint.repository.MachineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.cropmaint.enums.MachineStatus;
+import com.cropmaint.enums.CriticalityLevel;
 
 import java.util.List;
 import java.util.Optional;

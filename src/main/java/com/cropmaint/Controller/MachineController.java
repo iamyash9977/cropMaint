@@ -4,7 +4,7 @@ import com.cropmaint.dto.MachineRequestDTO;
 import com.cropmaint.dto.MachineResponseDTO;
 import com.cropmaint.exception.DuplicateResourceException;
 import com.cropmaint.exception.ResourceNotFoundException;
-import com.cropmaint.service.MachineService;
+import com.cropmaint.Service.MachineService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

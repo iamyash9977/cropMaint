@@ -1,49 +1,120 @@
 package com.cropmaint.entity;
 
-import com.cropmaint.enums.UserRole;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Objects;
 
 @Entity
-@Table(name = "user")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 255)
-    private String name;
+    @NotBlank(message = "Username cannot be blank")
+    @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
+    @Column(nullable = false, unique = true)
+    private String username;
 
-    @Column(nullable = false, unique = true, length = 255)
-    private String email;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private UserRole role;
-
-    @Column(name = "password_hash", nullable = false, length = 255)
+    @NotBlank(message = "Password hash cannot be blank")
+    @Column(name = "password_hash", nullable = false)
     private String passwordHash;
 
-    @Column(name = "phone_number", length = 20)
-    private String phoneNumber;
+    @NotBlank(message = "Email cannot be blank")
+    @Email(message = "Email should be valid")
+    @Column(nullable = false, unique = true)
+    private String email;
 
+    @NotBlank(message = "Role cannot be blank")
+    @Column(nullable = false)
+    private String role;
 
     @OneToMany(mappedBy = "technician", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MaintenanceLog> assignedLogs = new ArrayList<>();
 
+    public User() {
+    }
 
-    @OneToMany(mappedBy = "assignedTechnician", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Schedule> assignedSchedules = new HashSet<>();
+    public User(String username, String passwordHash, String email, String role) {
+        this.username = username;
+        this.passwordHash = passwordHash;
+        this.email = email;
+        this.role = role;
+    }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public List<MaintenanceLog> getAssignedLogs() {
+        return assignedLogs;
+    }
+
+    public void setAssignedLogs(List<MaintenanceLog> assignedLogs) {
+        this.assignedLogs = assignedLogs;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

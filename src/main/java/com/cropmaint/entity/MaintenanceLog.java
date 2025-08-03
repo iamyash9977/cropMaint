@@ -99,7 +99,6 @@ public class MaintenanceLog {
         this.machine = machine;
     }
 
-    // Getter and Setter for status
     public MaintenanceStatus getStatus() {
         return status;
     }

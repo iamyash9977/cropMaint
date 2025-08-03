@@ -1,9 +1,8 @@
 package com.cropmaint.repository;
 
 import com.cropmaint.entity.Schedule;
-import com.cropmaint.entity.Machine; // Import the Machine entity for relationships
-import com.cropmaint.entity.User; // Import the User entity for relationships (if uncommented)
-import com.cropmaint.enums.FrequencyType; // Import the enum
+import com.cropmaint.entity.Machine;
+import com.cropmaint.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

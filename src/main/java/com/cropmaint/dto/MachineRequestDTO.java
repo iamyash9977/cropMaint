@@ -1,56 +1,102 @@
 package com.cropmaint.dto;
 
+import java.time.LocalDate;
 import com.cropmaint.enums.CriticalityLevel;
 import com.cropmaint.enums.MachineStatus;
-import jakarta.validation.constraints.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class MachineRequestDTO {
-    @NotBlank(message = "Machine name cannot be blank")
     private String name;
-
-    @NotBlank(message = "Machine code cannot be blank")
-    @Size(min = 3, max = 20, message = "Machine code must be between 3 and 20 characters")
     private String machineCode;
-
-
-    @NotBlank(message = "Machine name cannot be blank")
-    @Size(max = 255, message = "Machine name cannot exceed 255 characters")
-    private String name;
-
-    @NotBlank(message = "Machine code cannot be blank")
-    @Size(max = 255, message = "Machine code cannot exceed 255 characters")
-    private String machineCode;
-
-    @Size(max = 255, message = "Location cannot exceed 255 characters")
     private String location;
-
-    @PastOrPresent(message = "Install date cannot be in the future")
     private LocalDate installDate;
-
-    @NotNull(message = "Machine status cannot be null")
     private MachineStatus status;
-
-    @Size(max = 255, message = "Machine type cannot exceed 255 characters")
     private String machineType;
-
-    @Size(max = 255, message = "Manufacturer cannot exceed 255 characters")
     private String manufacturer;
-
-    @Size(max = 255, message = "Model number cannot exceed 255 characters")
     private String modelNumber;
-
-    @Size(max = 255, message = "Serial number cannot exceed 255 characters")
     private String serialNumber;
-
-    @NotNull(message = "Criticality level cannot be null")
     private CriticalityLevel criticalityLevel;
 
+    // Constructors
+    public MachineRequestDTO() {
+    }
+
+    // Getters and Setters
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMachineCode() {
+        return machineCode;
+    }
+
+    public void setMachineCode(String machineCode) {
+        this.machineCode = machineCode;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public LocalDate getInstallDate() {
+        return installDate;
+    }
+
+    public void setInstallDate(LocalDate installDate) {
+        this.installDate = installDate;
+    }
+
+
+    public String getMachineType() {
+        return machineType;
+    }
+
+    public void setMachineType(String machineType) {
+        this.machineType = machineType;
+    }
+
+    public String getManufacturer() {
+        return manufacturer;
+    }
+
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
+    }
+
+    public String getModelNumber() {
+        return modelNumber;
+    }
+
+    public void setModelNumber(String modelNumber) {
+        this.modelNumber = modelNumber;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public MachineStatus getStatus() {
+        return status;
+    }
+    public void setStatus(MachineStatus status) {
+        this.status = status;
+    }
+
+    public CriticalityLevel getCriticalityLevel() {
+        return criticalityLevel;
+    }
+    public void setCriticalityLevel(CriticalityLevel criticalityLevel) {
+        this.criticalityLevel = criticalityLevel;
+    }
 }
